@@ -1,19 +1,31 @@
-export const COLORS = {
-  primary: "#2563EB",      // Blue
-  secondary: "#7C3AED",    // Purple
-  accent: "#06B6D4",       // Cyan
-
+export const colors = {
   background: "#050816",
-  surface: "#111827",
-  surfaceLight: "#1F2937",
 
-  text: "#FFFFFF",
-  textSecondary: "#CBD5E1",
-  textMuted: "#94A3B8",
+  surface: "#0B1023",
 
-  success: "#22C55E",
-  warning: "#F59E0B",
-  danger: "#EF4444",
+  card: "bg-white/5",
 
-  border: "#334155",
+  border: "border-white/10",
+
+  primary: "text-cyan-400",
+
+  secondary: "text-blue-400",
+
+  accent: "text-purple-400",
+
+  success: "text-emerald-400",
+
+  warning: "text-yellow-400",
+
+  danger: "text-red-400",
+
+  white: "text-white",
+
+  muted: "text-gray-400",
+
+  gradientPrimary:
+    "from-cyan-500 to-blue-600",
+
+  gradientPurple:
+    "from-purple-500 to-pink-600",
 };

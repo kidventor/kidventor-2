@@ -1,13 +1,23 @@
-export const TYPOGRAPHY = {
-  hero: "text-6xl md:text-8xl font-black",
-  h1: "text-5xl font-bold",
-  h2: "text-4xl font-bold",
-  h3: "text-3xl font-semibold",
+export const typography = {
 
-  body: "text-base",
-  bodyLarge: "text-lg",
+hero:
 
-  caption: "text-sm",
+"text-5xl md:text-6xl lg:text-7xl font-black",
 
-  button: "font-semibold",
+sectionTitle:
+
+"text-3xl md:text-4xl font-black",
+
+cardTitle:
+
+"text-2xl font-black",
+
+body:
+
+"text-base text-gray-400 leading-relaxed",
+
+small:
+
+"text-sm text-gray-400",
+
 };

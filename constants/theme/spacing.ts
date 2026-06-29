@@ -1,9 +1,19 @@
-export const SPACING = {
-  section: "py-24",
+export const spacing = {
+  container:
+    "mx-auto max-w-7xl px-6 lg:px-8",
 
-  container: "max-w-7xl mx-auto px-6 lg:px-8",
+  section:
+    "py-20",
 
-  card: "p-6",
+  sectionSmall:
+    "py-12",
 
-  hero: "pt-32 pb-24",
+  sectionLarge:
+    "py-28",
+
+  gap:
+    "gap-6",
+
+  card:
+    "p-6",
 };
