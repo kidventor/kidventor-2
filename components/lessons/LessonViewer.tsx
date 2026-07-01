@@ -11,6 +11,8 @@ import LessonNavigation from "./LessonNavigation";
 import LessonProgress from "./LessonProgress";
 
 type Lesson = {
+  id: string;
+
   emoji: string;
   title: string;
   difficulty: string;
@@ -73,14 +75,15 @@ export default function LessonViewer({
 />
 
       <LessonChallenge
-        title={lesson.challenge.title}
-        instruction={lesson.challenge.instruction}
-        type={lesson.challenge.type}
-        rewardXP={lesson.challenge.rewardXP}
-        rewardBadge={lesson.challenge.rewardBadge}
-        buttonText={lesson.challenge.buttonText}
-        completed={lesson.challenge.completed}
-      />
+  lessonId={lesson.id}
+  title={lesson.challenge.title}
+  instruction={lesson.challenge.instruction}
+  type={lesson.challenge.type}
+  rewardXP={lesson.challenge.rewardXP}
+  rewardBadge={lesson.challenge.rewardBadge}
+  buttonText={lesson.challenge.buttonText}
+  completed={lesson.challenge.completed}
+/>
 
       <LessonSummary
         title={lesson.title}

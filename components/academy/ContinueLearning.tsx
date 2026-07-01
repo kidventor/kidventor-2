@@ -1,8 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import Link from "next/link";
+import { homeRowMission } from "@/data/academy/hardware/home-row-mission";
+import { useEffect, useState } from "react";
+import { getCurrentLesson } from "@/lib/lessonProgress";
 export default function ContinueLearning() {
+
+  const [currentLesson, setCurrentLesson] = useState<string | null>(null);
+
+useEffect(() => {
+  setCurrentLesson(getCurrentLesson());
+}, []);
   return (
     <motion.section
       initial={{ opacity: 0, y: 25 }}
@@ -19,8 +28,10 @@ export default function ContinueLearning() {
           </p>
 
           <h2 className="mt-2 text-3xl font-black text-white tracking-tight">
-            Parts of a Computer
-          </h2>
+            {currentLesson === "hardware-001"
+  ? homeRowMission.title
+  : "Start Your Learning Journey"}
+            </h2>
 
           <p className="mt-3 max-w-xl text-sm md:text-base text-gray-400 leading-relaxed">
             Resume where you stopped and continue your digital adventure.
@@ -50,9 +61,12 @@ export default function ContinueLearning() {
           </p>
 
           {/* Clean Action Button */}
-          <button className="mt-2 w-full md:w-auto rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-bold text-sm text-white shadow-lg shadow-cyan-500/10 transition hover:scale-105 active:scale-95">
-            Continue →
-          </button>
+          <Link
+  href="/academy/lesson"
+  className="mt-2 w-full md:w-auto rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 text-center font-bold text-sm text-white shadow-lg shadow-cyan-500/10 transition hover:scale-105 active:scale-95"
+>
+  Continue →
+</Link>
 
         </div>
 

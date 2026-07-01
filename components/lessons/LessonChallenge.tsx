@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import { useEffect, useState } from "react";
+import { isLessonCompleted } from "@/lib/lessonProgress";
+import { completeLessonPipeline } from "@/lib/completeLessonPipeline";
 type LessonChallengeProps = {
+  lessonId: string;
   title: string;
   instruction: string;
   type: string;
@@ -13,12 +16,22 @@ type LessonChallengeProps = {
 };
 
 export default function LessonChallenge({
+  lessonId,
   title,
   instruction,
   rewardXP,
   rewardBadge,
   buttonText,
+  completed,
 }: LessonChallengeProps) {
+
+  const [isCompleted, setIsCompleted] = useState(false);
+  useEffect(() => {
+  setIsCompleted(
+    completed || isLessonCompleted(lessonId)
+  );
+}, [completed, lessonId]);
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 25 }}
@@ -66,9 +79,30 @@ export default function LessonChallenge({
 
           </div>
 
-          <button className="rounded-2xl bg-yellow-500 px-8 py-4 font-black text-black transition hover:scale-105 hover:bg-yellow-400 active:scale-95">
-            {buttonText}
-          </button>
+          <button
+onClick={() => {
+  const result = completeLessonPipeline({
+    lessonId,
+    rewardXP,
+  });
+
+  if (result.completed) {
+    setIsCompleted(true);
+  }
+
+  if (result.xpAwarded) {
+    console.log(`⭐ Total XP: ${result.totalXP}`);
+  }
+}}
+  disabled={isCompleted}
+  className={`rounded-2xl px-8 py-4 font-black transition active:scale-95 ${
+    isCompleted
+      ? "cursor-not-allowed bg-green-500 text-white"
+      : "bg-yellow-500 text-black hover:scale-105 hover:bg-yellow-400"
+  }`}
+>
+  {isCompleted ? "✅ Challenge Completed" : buttonText}
+</button>
 
         </div>
 
