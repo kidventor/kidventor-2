@@ -6,6 +6,9 @@ import MissionControl from "@/components/dashboard/MissionControl";
 import MissionMap from "@/components/dashboard/MissionMap";
 import BadgeCabinet from "@/components/profile/BadgeCabinet";
 import Desktop from "@/components/virtual-desktop/Desktop";
+import ExplorerNotebook from "@/components/notebook/ExplorerNotebook";
+
+
 export default function AcademyPage() {
   return (
     <main className="min-h-screen bg-[#050816] text-white">
@@ -18,13 +21,18 @@ export default function AcademyPage() {
 </div>
 
 <div className="mx-auto max-w-7xl px-6 py-12">
-        <ContinueLearning />
+  <ContinueLearning />
 
-        <DashboardCards />
-        <BadgeCabinet />
-        <MissionMap />
-        <Desktop />
-      </div>
+  <DashboardCards />
+
+  <ExplorerNotebook />
+
+  <BadgeCabinet />
+
+  <MissionMap />
+
+  <Desktop />
+</div>
     </main>
   );
 }

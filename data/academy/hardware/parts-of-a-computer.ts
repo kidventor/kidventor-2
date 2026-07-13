@@ -9,6 +9,45 @@ export const partsOfComputerLesson = {
 
   duration: "20 Minutes",
 
+  professor: {
+  speech:
+    "Hello Explorer! 👋 Welcome to your very first KidVentor mission. Today we're going to discover the amazing parts of a computer. Every great inventor begins by learning the tools they use. Read carefully, look at the pictures, and enjoy the adventure!",
+},
+
+byte: {
+  speech:
+    "Hi Explorer! 🤖 I can't wait to explore computers with you. Watch carefully... I'll ask you something at the end of the mission!",
+},
+
+funFact: {
+  fact:
+    "The very first computer was so large that it filled an entire room!",
+},
+
+vocabulary: {
+
+  words: [
+
+    {
+      knowledgeId: "computer",
+    },
+
+    {
+      knowledgeId: "monitor",
+    },
+
+    {
+      knowledgeId: "keyboard",
+    },
+
+    {
+      knowledgeId: "mouse",
+    },
+
+  ],
+
+},
+
   objectives: [
     "Identify the main parts of a computer.",
     "Explain the function of each part.",
@@ -90,20 +129,94 @@ export const partsOfComputerLesson = {
 challenge: {
   id: "challenge-001",
 
-  title: "Try It Yourself",
+  title: "Computer Parts Mission",
 
   instruction:
-    "Look around you. Can you point to a monitor, keyboard and mouse on a real computer? If you don't have a computer, look at a picture and identify them.",
+    "Answer all five questions correctly to complete the mission.",
 
-  type: "observation",
+  type: "multiple-choice",
 
   rewardXP: 50,
 
   rewardBadge: "Hardware Explorer",
 
-  buttonText: "I Have Completed This Challenge",
+  buttonText: "Finish Mission",
 
   completed: false,
+
+  questions: [
+
+    {
+      id: 1,
+      type: "multiple-choice",
+      question:
+        "Which computer part shows pictures and videos?",
+      options: [
+        "Keyboard",
+        "Monitor",
+        "Mouse",
+        "CPU",
+      ],
+      answer: 1,
+    },
+
+    {
+      id: 2,
+      type: "multiple-choice",
+      question:
+        "Which device is used for typing?",
+      options: [
+        "Keyboard",
+        "Monitor",
+        "Mouse",
+        "Printer",
+      ],
+      answer: 0,
+    },
+
+    {
+      id: 3,
+      type: "multiple-choice",
+      question:
+        "Which device controls the pointer?",
+      options: [
+        "Mouse",
+        "Monitor",
+        "CPU",
+        "SSD",
+      ],
+      answer: 0,
+    },
+
+    {
+      id: 4,
+      type: "multiple-choice",
+      question:
+        "Which one is an input device?",
+      options: [
+        "Keyboard",
+        "Speaker",
+        "Monitor",
+        "Projector",
+      ],
+      answer: 0,
+    },
+
+    {
+      id: 5,
+      type: "multiple-choice",
+      question:
+        "Which part is called the computer screen?",
+      options: [
+        "Monitor",
+        "Mouse",
+        "Printer",
+        "Scanner",
+      ],
+      answer: 0,
+    },
+
+  ],
 },
 
 };
