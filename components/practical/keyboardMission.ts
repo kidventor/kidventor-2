@@ -88,7 +88,7 @@ export const keyboardMission = {
         {
           id: "windows-key",
           title: "Windows Key",
-          image: "/images/keyboard/windows.webp",
+          image: "/images/keyboard/windows-key.webp",
         },
 
          {
@@ -98,8 +98,8 @@ export const keyboardMission = {
         },
 
          {
-          id: "escape-key",
-          title: "Escape-Key",
+          id: "esc-key",
+          title: "Esc-Key",
           image: "/images/keyboard/esc-key.webp",
         },
 
@@ -136,6 +136,61 @@ export const keyboardMission = {
           title: "F3",
           image: "/images/keyboard/f3.webp",
         },
+
+        {
+          id: "f4",
+          title: "F4",
+          image: "/images/keyboard/f4.webp",
+        },
+        {
+          id: "f5",
+          title: "F5",
+          image: "/images/keyboard/f5.webp",
+        },
+        {
+          id: "f6",
+          title: "F6",
+          image: "/images/keyboard/f6.webp",
+        },
+        {
+          id: "f7",
+          title: "F7",
+          image: "/images/keyboard/f7.webp",
+        },
+        {
+          id: "f8",
+          title: "F8",
+          image: "/images/keyboard/f8.webp",
+        },
+        {
+          id: "f9",
+          title: "F9",
+          image: "/images/keyboard/f9.webp",
+        },
+        {
+          id: "f10",
+          title: "F10",
+          image: "/images/keyboard/f10.webp",
+        },
+        {
+          id: "f11",
+          title: "F11",
+          image: "/images/keyboard/f11.webp",
+        },
+        {
+          id: "f12",
+          title: "F12",
+          image: "/images/keyboard/f12.webp",
+        },
+
+
+
+
+
+
+
+
+
 
       ],
 

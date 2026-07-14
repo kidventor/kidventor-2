@@ -332,15 +332,6 @@ startNewMission: () => {
   }
 
 
-
-  useMissionStore
-    .getState()
-    .completeMission(
-      nextMission
-    );
-
-
-
   const nextTasks =
     getCurrentMissionTasks();
 
@@ -379,14 +370,16 @@ startNewMission: () => {
 
 },
 
-// reset everything
-  reset: () =>
+  reset: () => {
+
+    const tasks =
+      getCurrentMissionTasks();
+
 
     set({
 
-
       currentAnswer:
-        getCurrentMissionTasks()[0].id,
+        tasks[0]?.id ?? "",
 
 
       selectedAnswer: null,
@@ -408,11 +401,12 @@ startNewMission: () => {
 
 
       totalTasks:
-        getCurrentMissionTasks().length,
+        tasks.length,
+
+    });
 
 
-    }),
-
+  },
 
 
 }));

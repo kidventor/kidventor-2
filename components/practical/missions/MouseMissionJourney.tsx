@@ -1,27 +1,22 @@
 "use client";
 
 import { useMissionStore } from "@/components/store/missionStore";
-import { keyboardMission } from "@/components/practical/keyboardMission";
+import { mouseMission } from "@/components/practical/mouseMission";
 
-
-export default function MissionJourney() {
-
+export default function MouseMissionJourney() {
 
   const currentMission =
     useMissionStore(
       (state) => state.currentMission
     );
 
-
   const completedMissions =
     useMissionStore(
       (state) => state.completedMissions
     );
 
-
-
   const missionRoadmap =
-    keyboardMission.missions.map(
+    mouseMission.missions.map(
       (mission, index) => ({
 
         id: mission.id,
@@ -30,10 +25,10 @@ export default function MissionJourney() {
 
         icon:
           [
-            "⌨️",
-            "⚡",
-            "🌲",
-            "💎",
+            "🖱️",
+            "🎯",
+            "✨",
+            "🏆",
           ][index],
 
         description:
@@ -42,17 +37,11 @@ export default function MissionJourney() {
       })
     );
 
-
-
   const currentIndex =
     missionRoadmap.findIndex(
       (mission) =>
         mission.id === currentMission
     );
-
-
-
-
 
   return (
 
@@ -63,14 +52,12 @@ export default function MissionJourney() {
       max-w-md
       rounded-3xl
       border
-      border-cyan-500/20
+      border-purple-500/20
       bg-slate-900/80
       p-5
       shadow-xl
       "
     >
-
-
 
       <div className="mb-5 text-center">
 
@@ -78,82 +65,57 @@ export default function MissionJourney() {
           className="
           text-2xl
           font-black
-          text-cyan-300
+          text-purple-300
           "
         >
-          🧭 Keyboard Adventure
+          🖱️ Mouse Adventure
         </h2>
 
-
         <p className="mt-1 text-sm text-gray-400">
-
-          Complete missions to unlock new skills.
-
+          Master every mouse skill to become a Mouse Expert.
         </p>
-
 
       </div>
 
-
-
-
-
-
       <div className="space-y-5">
-
 
         {
           missionRoadmap.map(
             (mission,index)=>{
-
 
               const completed =
                 completedMissions.includes(
                   mission.id
                 );
 
-
               const active =
-                currentMission === mission.id
-                &&
+                currentMission === mission.id &&
                 !completed;
-
-
 
               const locked =
                 index > currentIndex;
 
-
-
               let cardStyle =
-  "border-slate-700 bg-slate-800";
+                "border-slate-700 bg-slate-800";
 
+              if(active){
 
-if(active){
+                cardStyle =
+                "border-purple-400 bg-purple-500/10 shadow-[0_0_25px_rgba(168,85,247,.25)]";
 
-  cardStyle =
-  "border-cyan-400 bg-cyan-500/10 shadow-[0_0_25px_rgba(34,211,238,.25)]";
+              }
 
-}
+              if(completed){
 
+                cardStyle =
+                "border-green-400 bg-green-500/10";
 
-
-if(completed){
-
-  cardStyle =
-  "border-green-400 bg-green-500/10";
-
-}
-
-
-
+              }
 
               return (
 
                 <div
-
                   key={mission.id}
-
                   className={`
                   rounded-3xl
                   border
@@ -162,12 +124,7 @@ if(completed){
                   duration-300
                   ${cardStyle}
                   `}
-
                 >
-
-
-
-
 
                   <div
                     className="
@@ -176,8 +133,6 @@ if(completed){
                     gap-4
                     "
                   >
-
-
 
                     <div
                       className="
@@ -194,27 +149,15 @@ if(completed){
 
                       {
                         completed
-                        ?
-                        "✅"
-                        :
-                        locked
-                        ?
-                        "🔒"
-                        :
-                        mission.icon
+                        ? "✅"
+                        : locked
+                        ? "🔒"
+                        : mission.icon
                       }
-
 
                     </div>
 
-
-
-
-
-
-
                     <div>
-
 
                       <h3
                         className="
@@ -223,13 +166,8 @@ if(completed){
                         text-white
                         "
                       >
-
                         {mission.title}
-
                       </h3>
-
-
-
 
                       <p
                         className="
@@ -241,41 +179,17 @@ if(completed){
 
                         {
                           completed
-
-                          ?
-
-                          "Mission Complete ⭐"
-
-                          :
-
-                          locked
-
-                          ?
-
-                          "Complete previous mission to unlock"
-
-                          :
-
-                          mission.description
-
+                          ? "Mission Complete ⭐"
+                          : locked
+                          ? "Complete previous mission to unlock"
+                          : mission.description
                         }
-
 
                       </p>
 
-
-
                     </div>
 
-
-
                   </div>
-
-
-
-
-
-
 
                   {
                     active && (
@@ -284,13 +198,13 @@ if(completed){
                         className="
                         mt-4
                         rounded-xl
-                        bg-cyan-400/10
+                        bg-purple-400/10
                         px-3
                         py-2
                         text-center
                         text-xs
                         font-bold
-                        text-cyan-300
+                        text-purple-300
                         animate-pulse
                         "
                       >
@@ -302,25 +216,15 @@ if(completed){
                     )
                   }
 
-
-
-
-
                 </div>
 
               );
-
 
             }
           )
         }
 
-
-
       </div>
-
-
-
 
     </section>
 

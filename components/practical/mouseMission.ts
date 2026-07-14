@@ -1,163 +1,353 @@
 export const mouseMission = {
 
+
   id: "mouse-mastery",
+
 
   title: "Mouse Mastery",
 
+
   description:
-    "Learn how to control and use a computer mouse.",
+    "Learn how to control and use a computer mouse through interactive practice.",
+
+
 
 
   missions: [
+
+
 
     {
 
       id: "mouse-basics",
 
+
       title: "Mouse Basics",
 
+
       description:
-        "Learn the important parts and buttons of a computer mouse.",
+        "Learn the important parts and basic actions of a computer mouse.",
+
 
 
       tasks: [
 
+
+
         {
+
           id: "left-click",
+
 
           title: "Left Click",
 
+
           type: "click",
 
+
           instruction:
-            "Click the left mouse button.",
+            "Click the left mouse button to select objects.",
+
 
           xp: 20,
+
         },
 
 
+
+
         {
+
           id: "right-click",
+
 
           title: "Right Click",
 
+
           type: "right-click",
 
+
           instruction:
-            "Click the right mouse button.",
+            "Right click to open extra options.",
+
 
           xp: 20,
+
         },
 
 
+
+
+
         {
+
           id: "scroll-wheel",
+
 
           title: "Scroll Wheel",
 
+
           type: "scroll",
 
+
           instruction:
-            "Use the scroll wheel to move through pages.",
+            "Use the scroll wheel to move up and down.",
+
 
           xp: 20,
+
         },
 
+
+
       ],
+
 
     },
 
 
 
+
+
+
+
+
     {
+
 
       id: "mouse-control",
 
+
       title: "Mouse Control",
 
+
       description:
-        "Practice controlling the mouse accurately.",
+        "Improve mouse movement, accuracy and speed.",
+
+
 
 
       tasks: [
 
+
+
         {
+
           id: "click-target",
+
 
           title: "Click Target",
 
+
           type: "target",
 
-          instruction:
-            "Move the cursor and click the target.",
 
-          xp: 50,
+          instruction:
+            "Move the mouse pointer and click the target.",
+
+
+          xp: 40,
+
         },
 
 
+
+
+
         {
+
           id: "double-click",
+
 
           title: "Double Click",
 
+
           type: "double-click",
 
-          instruction:
-            "Double click the object quickly.",
 
-          xp: 50,
+          instruction:
+            "Double click quickly on the object.",
+
+
+          xp: 40,
+
         },
+
+
+
 
 
         {
+
           id: "drag-drop",
+
 
           title: "Drag and Drop",
 
+
           type: "drag",
 
-          instruction:
-            "Drag the object into the correct area.",
 
-          xp: 50,
+          instruction:
+            "Drag the object and drop it into the correct area.",
+
+
+          xp: 40,
+
         },
+
+
 
       ],
 
+
     },
+
+
+
+
+
+
 
 
 
     {
 
-      id: "mouse-challenge",
 
-      title: "Mouse Challenge",
+      id: "mouse-highlight",
+
+
+      title: "Mouse Highlight Practice",
+
 
       description:
-        "Complete a full mouse skills challenge.",
+        "Learn how to highlight and select items using the mouse.",
+
+
 
 
       tasks: [
 
+
+
+
         {
-          id: "mouse-obstacle",
 
-          title: "Mouse Obstacle Course",
 
-          type: "challenge",
+          id: "highlight-object",
+
+
+          title: "Highlight Object",
+
+
+          type: "highlight",
+
 
           instruction:
-            "Complete all mouse activities.",
+            "Move the mouse over the object to highlight it.",
 
-          xp: 100,
+
+          xp: 50,
+
         },
 
+
+
+
+
+        {
+
+
+          id: "select-text",
+
+
+          title: "Select Text",
+
+
+          type: "selection",
+
+
+          instruction:
+            "Click and drag to select words on the screen.",
+
+
+          xp: 50,
+
+        },
+
+
+
+
       ],
+
+
 
     },
 
 
+
+
+
+
+
+
+
+    {
+
+
+
+      id: "mouse-challenge",
+
+
+
+      title: "Mouse Challenge",
+
+
+
+      description:
+        "Complete the final mouse skills adventure.",
+
+
+
+
+
+      tasks: [
+
+
+
+        {
+
+
+          id: "mouse-challenge",
+
+
+          title: "Mouse Adventure",
+
+
+          type: "challenge",
+
+
+          instruction:
+            "Complete different mouse activities to become a Mouse Master.",
+
+
+          xp: 100,
+
+
+        },
+
+
+
+      ],
+
+
+    },
+
+
+
+
   ],
+
+
 
 };

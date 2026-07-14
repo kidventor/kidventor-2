@@ -9,22 +9,41 @@ type MissionState = {
 
   keyboardComplete: boolean;
 
+  mouseComplete: boolean;
+
 
   getNextMission: () => string | null;
 
 
-  completeMission: (
+  completeMission:
+  (
     missionId: string
   ) => void;
 
 
-  reset: () => void;
+
+  resetKeyboardProgress:
+  () => void;
+
+
+
+  resetMouseProgress:
+  () => void;
+
+
+
+  reset:
+  () => void;
 
 };
 
 
 
-const missionOrder = [
+
+
+
+
+const keyboardMissions = [
 
   "basic-keys",
 
@@ -40,6 +59,42 @@ const missionOrder = [
 
 
 
+
+
+const mouseMissions = [
+
+  "mouse-basics",
+
+  "mouse-control",
+
+  "mouse-highlight",
+
+  "mouse-challenge",
+
+];
+
+
+
+
+
+
+
+const missionOrder = [
+
+  ...keyboardMissions,
+
+  ...mouseMissions,
+
+];
+
+
+
+
+
+
+
+
+
 export const useMissionStore =
 create<MissionState>((set, get) => ({
 
@@ -50,11 +105,21 @@ create<MissionState>((set, get) => ({
 
 
 
+
   completedMissions: [],
 
 
 
+
   keyboardComplete: false,
+
+
+
+  mouseComplete: false,
+
+
+
+
 
 
 
@@ -64,8 +129,7 @@ create<MissionState>((set, get) => ({
 
 
     const completed =
-      get()
-      .completedMissions;
+      get().completedMissions;
 
 
 
@@ -90,6 +154,8 @@ create<MissionState>((set, get) => ({
 
 
 
+
+
   completeMission: (missionId) => {
 
 
@@ -97,13 +163,15 @@ create<MissionState>((set, get) => ({
 
 
 
-      const updated =
+      const updatedMissions =
 
         state.completedMissions.includes(
           missionId
         )
 
-        ? state.completedMissions
+        ?
+
+        state.completedMissions
 
         :
 
@@ -111,9 +179,13 @@ create<MissionState>((set, get) => ({
 
           ...state.completedMissions,
 
-          missionId
+          missionId,
 
         ];
+
+
+
+
 
 
 
@@ -122,7 +194,6 @@ create<MissionState>((set, get) => ({
         missionOrder.indexOf(
           missionId
         );
-
 
 
 
@@ -135,8 +206,43 @@ create<MissionState>((set, get) => ({
 
 
 
-      const finishedKeyboardCourse =
-        !nextMission;
+
+
+
+      const keyboardFinished =
+
+        keyboardMissions.every(
+
+          (mission) =>
+
+            updatedMissions.includes(
+              mission
+            )
+
+        );
+
+
+
+
+
+
+
+
+      const mouseFinished =
+
+        mouseMissions.every(
+
+          (mission) =>
+
+            updatedMissions.includes(
+              mission
+            )
+
+        );
+
+
+
+
 
 
 
@@ -145,26 +251,25 @@ create<MissionState>((set, get) => ({
 
 
         completedMissions:
-          updated,
+          updatedMissions,
 
 
 
         currentMission:
 
-          nextMission
-
-          ?
-
-          nextMission
-
-          :
+          nextMission ??
 
           missionId,
 
 
 
         keyboardComplete:
-          finishedKeyboardCourse,
+          keyboardFinished,
+
+
+
+        mouseComplete:
+          mouseFinished,
 
 
       };
@@ -181,7 +286,126 @@ create<MissionState>((set, get) => ({
 
 
 
-  reset: () =>
+
+
+  // RESET ONLY KEYBOARD PROGRESS
+
+  resetKeyboardProgress: () => {
+
+
+    set((state) => {
+
+
+      const remaining =
+
+        state.completedMissions.filter(
+
+          (mission) =>
+
+            !keyboardMissions.includes(
+              mission
+            )
+
+        );
+
+
+
+
+
+      return {
+
+
+        completedMissions:
+          remaining,
+
+
+
+        currentMission:
+          "basic-keys",
+
+
+
+        keyboardComplete:
+          false,
+
+
+      };
+
+
+    });
+
+
+  },
+
+
+
+
+
+
+
+
+
+  // RESET ONLY MOUSE PROGRESS
+
+  resetMouseProgress: () => {
+
+
+    set((state) => {
+
+
+      const remaining =
+
+        state.completedMissions.filter(
+
+          (mission) =>
+
+            !mouseMissions.includes(
+              mission
+            )
+
+        );
+
+
+
+
+
+      return {
+
+
+        completedMissions:
+          remaining,
+
+
+
+        currentMission:
+          "mouse-basics",
+
+
+
+        mouseComplete:
+          false,
+
+
+      };
+
+
+    });
+
+
+  },
+
+
+
+
+
+
+
+
+
+  // COMPLETE GAME RESET
+
+  reset: () => {
+
 
     set({
 
@@ -191,8 +415,7 @@ create<MissionState>((set, get) => ({
 
 
 
-      completedMissions:
-        [],
+      completedMissions: [],
 
 
 
@@ -200,7 +423,15 @@ create<MissionState>((set, get) => ({
         false,
 
 
-    }),
+
+      mouseComplete:
+        false,
+
+
+    });
+
+
+  },
 
 
 

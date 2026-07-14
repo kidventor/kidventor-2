@@ -4,113 +4,138 @@ import DropCanvas from "./DropCanvas";
 import PartsPanel from "./PartsPanel";
 import { useRecognitionStore } from "@/components/store/recognitionStore";
 
-
 export default function MissionPanel() {
-
 
   const currentAnswer =
     useRecognitionStore(
       (state) => state.currentAnswer
     );
 
-
   const completed =
     useRecognitionStore(
       (state) => state.completed
     );
 
-
-
   const title =
     currentAnswer.toUpperCase();
 
-
-
   return (
-    <section className="w-full space-y-4">
 
- 
-      {/* Mission Brief */}
+    <section
+      className="
+      flex
+      h-full
+      w-full
+      flex-col
+      "
+    >
 
-      <div
-        className="
-        rounded-3xl
-        border border-cyan-500/20
-        bg-slate-900
-        p-4
-        "
-      >
+      {/* Compact Mission Header */}
 
-        <p className="text-xs font-black uppercase tracking-wider text-cyan-400">
-          Today's Mission
-        </p>
+  <div
+  className="
+  mb-3
+  flex
+  w-[70%]
+  items-center
+  justify-between
+  rounded-2xl
+  border
+  border-cyan-500/20
+  bg-slate-900
+  px-5
+  py-3
+  "
+>
 
+        <div>
 
-        <h2 className="mt-2 text-3xl font-black text-white">
+          <p
+            className="
+            text-xs
+            font-black
+            uppercase
+            tracking-widest
+            text-cyan-400
+            "
+          >
+            Current Objective
+          </p>
 
-          {
-            completed
-            ? "MISSION COMPLETE 🎉"
-            :
-            <>
-              Find the{" "}
-              <span className="text-yellow-400">
-                {title}
-              </span>
-            </>
-          }
+          <h2
+            className="
+            mt-1
+            text-xl
+            font-black
+            text-white
+            "
+          >
+            {
+              completed
+                ? "🎉 Mission Complete!"
+                : (
+                  <>
+                    Find the{" "}
+                    <span className="text-yellow-400">
+                      {title}
+                    </span>
+                  </>
+                )
+            }
+          </h2>
 
-        </h2>
+        </div>
 
-
-        <p className="mt-2 text-sm text-gray-300">
-          Select the correct keyboard key and place it on the mission canvas.
-        </p>
-
+        <div
+          className="
+          rounded-xl
+          bg-cyan-500/10
+          px-4
+          py-2
+          text-xs
+          font-bold
+          uppercase
+          tracking-wider
+          text-cyan-300
+          "
+        >
+          Drag → Drop → Learn
+        </div>
 
       </div>
 
-
-
-      {/* Mission Workspace */}
+      {/* Workspace */}
 
       <div
         className="
         grid
-        h-[500px]
-        w-full
-        items-stretch
+        flex-1
         gap-4
-        lg:grid-cols-[280px_minmax(0,1fr)]
+        lg:grid-cols-[250px_minmax(0,1fr)]
         "
       >
 
-
-        <aside className="h-full overflow-hidden">
-
+        <aside
+          className="
+          h-full
+          "
+        >
           <PartsPanel />
-
         </aside>
-
-
 
         <main
           className="
           h-full
           min-w-0
-          overflow-hidden
           "
         >
-
           <DropCanvas />
-         
-
         </main>
-
 
       </div>
 
-
     </section>
+
   );
+
 }

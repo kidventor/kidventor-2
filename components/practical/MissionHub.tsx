@@ -1,194 +1,326 @@
 "use client";
 
-"use client";
+import { useEffect, useState } from "react";
 
-import { useState } from "react";
 
-import KeyboardRecognition 
+import KeyboardRecognition
 from "@/components/practical/missions/KeyboardRecognition/KeyboardRecognition";
+
 
 import MouseArena
 from "@/components/practical/missions/MouseMission/MouseArena";
 
-import MissionJourney 
+
+import MissionJourney
 from "@/components/practical/missions/MissionJourney";
 
-import { useMissionStore } 
+import MouseMissionJourney
+from "@/components/practical/missions/MouseMissionJourney";
+
+
+import { useMissionStore }
 from "@/components/store/missionStore";
+
+
+import { useRecognitionStore }
+from "@/components/store/recognitionStore";
+
+
+import { useMouseStore }
+from "@/components/store/mouseStore";
+
+
+
+
 
 export default function MissionHub() {
 
 
+
   const keyboardComplete =
-  useMissionStore(
-    (state) =>
-      state.completedMissions.includes(
-        "basic-keys"
-      )
-  );
+    useMissionStore(
+      (state)=>
+        state.keyboardComplete
+    );
 
 
-  const [activeMission, setActiveMission] =
-useState<
-"hub" | "keyboard" | "mouse"
->("hub");
 
-  if (activeMission === "keyboard") {
+  const mouseComplete =
+    useMissionStore(
+      (state)=>
+        state.mouseComplete
+    );
+
+
+
+
+
+  // Mission engine resets
+
+  const resetKeyboardProgress =
+    useMissionStore(
+      (state)=>
+        state.resetKeyboardProgress
+    );
+
+
+
+  const resetMouseProgress =
+    useMissionStore(
+      (state)=>
+        state.resetMouseProgress
+    );
+
+
+
+
+
+  // Local mission resets
+
+  const resetKeyboardStore =
+    useRecognitionStore(
+      (state)=>
+        state.reset
+    );
+
+
+
+  const resetMouseStore =
+    useMouseStore(
+      (state)=>
+        state.reset
+    );
+
+
+
+
+
+
+  const [activeMission,setActiveMission] =
+  useState<
+    "hub" | "keyboard" | "mouse"
+  >("hub");
+
+
+
+
+
+
+
+
+  useEffect(()=>{
+
+
+    if(
+      activeMission === "mouse" &&
+      mouseComplete
+    ){
+
+      const timer =
+      setTimeout(()=>{
+
+        setActiveMission("hub");
+
+      },1500);
+
+
+
+      return ()=>clearTimeout(timer);
+
+    }
+
+
+  },[
+    activeMission,
+    mouseComplete
+  ]);
+
+
+
+
+
+
+
+
+
+
+  if(activeMission==="keyboard"){
+
 
     return (
 
       <KeyboardRecognition
-        onBack={() => setActiveMission("hub")}
+
+        onBack={()=>
+          setActiveMission("hub")
+        }
+
       />
 
     );
 
   }
 
-  if (activeMission === "mouse") {
-
-  return (
-
-    <MouseArena
-      onBack={() => setActiveMission("hub")}
-    />
-
-  );
-
-}
 
 
 
 
-  return (
-
-    <section
-      className="
-      min-h-screen
-      p-6
-      "
-    >
-
-
-      <h1
-        className="
-        text-4xl
-        font-black
-        text-cyan-300
-        "
-      >
-        🧭 Mission Control Center
-      </h1>
 
 
 
-      <p className="mt-3 text-gray-300">
-        Choose your practical learning adventure.
-      </p>
+
+  if(activeMission==="mouse"){
+
+
+    return (
+
+      <MouseArena
+
+        onBack={()=>
+          setActiveMission("hub")
+        }
+
+      />
+
+    );
+
+  }
+
+
+
+
+
 
 
 
 
-      <div
-        className="
-        mt-8
-        grid
-        gap-6
-        md:grid-cols-3
-        "
-      >
+  return (
 
-
-
-
-        {/* KEYBOARD CARD */}
-
-
-        <div
+<section
 className="
-group
-relative
-overflow-hidden
+min-h-screen
+p-6
+"
+>
+
+
+
+<h1
+className="
+text-4xl
+font-black
+text-cyan-300
+"
+>
+
+🧭 Mission Control Center
+
+</h1>
+
+
+
+<p className="mt-3 text-gray-300">
+
+Choose your practical learning adventure.
+
+</p>
+
+
+
+
+
+
+
+
+<div
+className="
+mt-8
+grid
+gap-6
+md:grid-cols-3
+"
+>
+
+
+
+
+
+
+
+{/* KEYBOARD CARD */}
+
+
+
+<div
+className="
 rounded-3xl
 border
 border-cyan-500/40
 bg-slate-900
 p-5
-shadow-[0_20px_50px_rgba(34,211,238,.15)]
-transition-all
-duration-500
-hover:-translate-y-2
-hover:border-cyan-300
+shadow-xl
 "
 >
 
-<div
+
+
+<h2
 className="
-absolute
-right-0
-top-0
-h-24
-w-24
-rounded-full
-bg-cyan-400/20
-blur-3xl
+text-2xl
+font-black
+text-white
 "
-/>
+>
 
-
-<h2 className="text-2xl font-black text-white">
 ⌨️ Keyboard Galaxy
+
 </h2>
 
 
-<p className="mt-2 text-sm text-gray-400">
+
+<p
+className="
+mt-2
+text-sm
+text-gray-400
+"
+>
+
 Master keyboard skills through interactive challenges.
+
 </p>
 
 
-<div
-className="
-mt-4
-rounded-2xl
-border
-border-cyan-500/20
-bg-slate-950
-p-3
-"
->
 
 <MissionJourney />
 
-</div>
 
 
-<div
-className="
-mt-4
-inline-flex
-rounded-full
-bg-cyan-400/20
-px-4
-py-2
-text-xs
-font-black
-text-cyan-300
-"
->
-🟢 ACTIVE TRAINING
-</div>
 
 
 
 
 {
+
 keyboardComplete ? (
+
 
 <button
 
-onClick={() =>
-  setActiveMission("keyboard")
-}
+onClick={()=>{
+
+
+resetKeyboardProgress();
+
+
+resetKeyboardStore();
+
+
+setActiveMission("keyboard");
+
+
+}}
+
 
 className="
 mt-5
@@ -204,21 +336,29 @@ text-cyan-300
 transition
 hover:scale-105
 "
+
 >
 
-🔄 Replay Keyboard Mission
+🔄 Replay Keyboard Adventure
 
 </button>
 
 
-) : (
+)
+
+
+
+:
+
+(
 
 
 <button
 
-onClick={() =>
-  setActiveMission("keyboard")
+onClick={()=>
+setActiveMission("keyboard")
 }
+
 
 className="
 mt-5
@@ -229,18 +369,20 @@ px-5
 py-3
 font-black
 text-black
-transition
-hover:scale-105
 "
+
 >
 
-🚀 Enter Keyboard Lab
+🚀 Enter Keyboard Adventure
 
 </button>
 
 
 )
+
+
 }
+
 
 
 </div>
@@ -251,97 +393,75 @@ hover:scale-105
 
 
 
-       {/* MOUSE CARD */}
+
+
+{/* MOUSE CARD */}
+
 
 
 <div
-  className={`
-  group
-  rounded-3xl
-  border
-  bg-slate-900
-  p-5
-  shadow-xl
-  transition-all
-  duration-500
-  hover:-translate-y-2
 
-  ${
-    keyboardComplete
-    ?
-    "border-purple-500/40"
-    :
-    "border-purple-500/20 opacity-70"
-  }
+className={`
 
-  `}
+rounded-3xl
+border
+bg-slate-900
+p-5
+shadow-xl
+
+
+${
+keyboardComplete
+
+?
+
+"border-purple-500/40"
+
+:
+
+"border-purple-500/20 opacity-70"
+
+}
+
+`}
+
 >
 
 
-<h2 className="text-2xl font-black text-white">
+
+<h2
+className="
+text-2xl
+font-black
+text-white
+"
+>
+
 🖱 Mouse Arena
+
 </h2>
 
 
 
-<p className="mt-3 text-sm text-gray-400">
+
+
+<p
+className="
+mt-3
+text-sm
+text-gray-400
+"
+>
+
 Learn clicking, dragging and precision control.
+
 </p>
 
 
 
 
-<div
-className="
-mt-6
-flex
-h-40
-items-center
-justify-center
-rounded-2xl
-border
-border-purple-500/20
-bg-slate-950
-text-6xl
-transition
-group-hover:scale-105
-"
->
-🖱️
-</div>
 
-
-
-
-
-<div
-className="
-mt-4
-rounded-full
-bg-purple-400/10
-px-4
-py-2
-text-center
-text-xs
-font-black
-text-purple-300
-"
->
-
-{
-keyboardComplete
-
-?
-
-"🟢 UNLOCKED MOUSE LAB"
-
-:
-
-"🔒 LOCKED - COMPLETE KEYBOARD GALAXY"
-
-}
-
-</div>
+<MouseMissionJourney />
 
 
 
@@ -349,13 +469,72 @@ keyboardComplete
 
 
 {
-keyboardComplete && (
+
+keyboardComplete ? (
+
+
+mouseComplete ? (
+
 
 <button
 
-onClick={() =>
+
+onClick={()=>{
+
+
+resetMouseProgress();
+
+
+resetMouseStore();
+
+
+setActiveMission("mouse");
+
+
+}}
+
+
+
+className="
+mt-5
+w-full
+rounded-xl
+border
+border-purple-400/40
+bg-slate-800
+px-5
+py-3
+font-black
+text-purple-300
+transition
+hover:scale-105
+"
+
+>
+
+
+🔄 Replay Mouse Arena
+
+
+</button>
+
+
+)
+
+
+
+:
+
+(
+
+
+<button
+
+
+onClick={()=>
 setActiveMission("mouse")
 }
+
 
 className="
 mt-5
@@ -366,42 +545,47 @@ px-5
 py-3
 font-black
 text-black
-transition
-hover:scale-105
-hover:bg-purple-300
 "
 
 >
 
+
 🚀 Enter Mouse Arena
+
 
 </button>
 
+
 )
 
-}
+
+)
 
 
 
+:
 
-{
+(
 
-!keyboardComplete && (
 
 <div
+
 className="
 mt-5
 text-center
 text-sm
 text-gray-500
 "
+
 >
 
-Complete Keyboard Galaxy first
+🔒 Complete Keyboard Galaxy first
 
 </div>
 
+
 )
+
 
 }
 
@@ -416,36 +600,58 @@ Complete Keyboard Galaxy first
 
 
 
-        {/* HARDWARE CARD */}
+
+{/* HARDWARE CARD */}
 
 
-        <div
+
+<div
+
 className="
-group
 rounded-3xl
 border
 border-yellow-500/40
 bg-slate-900
 p-5
 shadow-xl
-transition-all
-duration-500
-hover:-translate-y-2
 "
+
 >
 
 
-<h2 className="text-2xl font-black text-white">
+
+<h2
+className="
+text-2xl
+font-black
+text-white
+"
+>
+
 🖥 Computer Workshop
+
 </h2>
 
 
-<p className="mt-3 text-sm text-gray-400">
+
+
+<p
+className="
+mt-3
+text-sm
+text-gray-400
+"
+>
+
 Assemble and identify computer components.
+
 </p>
 
 
+
+
 <div
+
 className="
 mt-6
 flex
@@ -453,31 +659,17 @@ h-40
 items-center
 justify-center
 rounded-2xl
-border
-border-yellow-500/20
 bg-slate-950
-text-4xl
+text-5xl
 "
+
 >
+
 🔒
+
 </div>
 
 
-<div
-className="
-mt-4
-rounded-full
-bg-yellow-400/10
-px-4
-py-2
-text-center
-text-xs
-font-black
-text-yellow-300
-"
->
-🔒 FUTURE WORKSHOP
-</div>
 
 
 </div>
@@ -485,10 +677,16 @@ text-yellow-300
 
 
 
-      </div>
 
 
-    </section>
+
+
+</div>
+
+
+
+</section>
+
 
   );
 
